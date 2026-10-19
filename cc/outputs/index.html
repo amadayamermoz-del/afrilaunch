@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Edmark — la plateforme qui aide les équipes à aller de l'idée à l'impact." />
+    <title>Edmark — Construire l’impact, simplement</title>
+    <style>
+      :root {
+        --ink: #10241e;
+        --muted: #68756f;
+        --line: #dfe6e1;
+        --cream: #f8f6f0;
+        --mint: #d7f1dd;
+        --green: #1d754d;
+        --deep-green: #123f2c;
+        --orange: #f5b457;
+        --white: #fff;
+        --shadow: 0 22px 55px rgba(20, 51, 38, .12);
+      }
+
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: var(--cream);
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.5;
+      }
+      a { color: inherit; text-decoration: none; }
+      .container { width: min(1160px, calc(100% - 40px)); margin: auto; }
+      .eyebrow { display: inline-flex; align-items: center; gap: 8px; color: var(--green); font-size: .76rem; font-weight: 800; letter-spacing: .09em; text-transform: uppercase; }
+      .eyebrow::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--orange); }
+
+      .announcement { background: var(--deep-green); color: #e8f5ea; text-align: center; padding: 10px 20px; font-size: .88rem; }
+      .announcement a { margin-left: 12px; color: white; font-weight: 800; text-decoration: underline; text-underline-offset: 3px; }
+      header { position: sticky; top: 0; z-index: 20; background: rgba(248,246,240,.88); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(223,230,225,.8); }
+      .nav { height: 74px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+      .brand { display: inline-flex; align-items: center; gap: 10px; font-size: 1.32rem; font-weight: 900; letter-spacing: -.06em; }
+      .mark { position: relative; display: grid; place-items: center; width: 31px; height: 31px; color: white; background: var(--green); border-radius: 10px 10px 10px 2px; font-size: .8rem; letter-spacing: 0; }
+      .nav-links { display: flex; gap: 29px; align-items: center; font-size: .91rem; font-weight: 650; }
+      .nav-links a:hover { color: var(--green); }
+      .button { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 13px 19px; border-radius: 999px; border: 1px solid transparent; background: var(--green); color: white; font-size: .92rem; font-weight: 800; transition: .2s ease; cursor: pointer; }
+      .button:hover { transform: translateY(-2px); background: var(--deep-green); box-shadow: 0 8px 20px rgba(18,63,44,.2); }
+      .button.light { background: white; color: var(--deep-green); }
+      .button.light:hover { background: #edf8ef; }
+      .button.outline { background: transparent; border-color: #aabbb1; color: var(--ink); }
+      .button.outline:hover { background: white; border-color: var(--green); color: var(--green); box-shadow: none; }
+      .mobile-toggle { display: none; border: 0; background: none; font-size: 1.4rem; color: var(--ink); }
+
+      .hero { overflow: hidden; padding: 88px 0 72px; }
+      .hero-grid { display: grid; grid-template-columns: 1.03fr .97fr; gap: 60px; align-items: center; }
+      h1, h2, h3, p { margin-top: 0; }
+      h1 { max-width: 650px; margin: 16px 0 24px; font-size: clamp(2.7rem, 5.5vw, 5rem); line-height: .98; letter-spacing: -.065em; }
+      h1 em { color: var(--green); font-style: normal; }
+      .lead { max-width: 560px; color: var(--muted); font-size: 1.13rem; line-height: 1.7; }
+      .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+      .proof { display: flex; align-items: center; gap: 12px; margin-top: 31px; color: var(--muted); font-size: .82rem; font-weight: 650; }
+      .avatars { display: flex; padding-left: 8px; }
+      .avatar { width: 29px; height: 29px; margin-left: -8px; border: 2px solid var(--cream); border-radius: 50%; background: linear-gradient(140deg, #f6c37a, #965937); }
+      .avatar:nth-child(2) { background: linear-gradient(140deg, #d4896a, #452e31); }.avatar:nth-child(3) { background: linear-gradient(140deg, #392418, #de9d74); }.avatar:nth-child(4) { background: linear-gradient(140deg, #eddab9, #7a4a2d); }
+
+      .visual { position: relative; min-height: 440px; }
+      .orb { position: absolute; width: 400px; height: 400px; top: 0; right: -45px; border-radius: 50%; background: var(--mint); }
+      .dashboard { position: absolute; inset: 38px 0 0 22px; padding: 19px; border: 1px solid rgba(255,255,255,.8); border-radius: 20px; background: rgba(255,255,255,.91); box-shadow: var(--shadow); transform: rotate(2deg); }
+      .dash-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; }
+      .mini-title { font-size: .7rem; color: var(--muted); font-weight: 700; }.tiny-pill { padding: 5px 9px; background: #e7f6e9; color: var(--green); border-radius: 99px; font-size: .65rem; font-weight: 800; }
+      .chart-card { padding: 16px; border: 1px solid #ebefec; border-radius: 13px; background: #fff; }
+      .chart-heading { display: flex; justify-content: space-between; margin-bottom: 13px; font-size: .8rem; font-weight: 800; }.chart-heading span { color: var(--green); }
+      .bars { height: 118px; display: flex; align-items: end; justify-content: space-between; gap: 8px; padding: 0 3px; border-bottom: 1px solid #e8efea; }
+      .bar { width: 13%; min-height: 18px; border-radius: 5px 5px 0 0; background: #cce9d3; }.bar.active { background: var(--green); }
+      .dash-row { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; margin-top: 13px; }
+      .metric { padding: 14px; border-radius: 12px; background: #f7f9f7; }.metric small { display: block; color: var(--muted); font-weight: 650; }.metric strong { display: block; margin: 5px 0 3px; font-size: 1.45rem; letter-spacing: -.06em; }.up { color: var(--green); font-size: .72rem; font-weight: 800; }
+      .float-card { position: absolute; right: -21px; bottom: 2px; display: flex; align-items: center; gap: 11px; width: 215px; padding: 13px; border-radius: 13px; background: var(--deep-green); color: white; box-shadow: 0 14px 30px rgba(18,63,44,.25); transform: rotate(-4deg); }.float-icon { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 9px; background: var(--orange); color: var(--deep-green); font-weight: 900; }.float-card small { display: block; opacity: .68; }.float-card b { font-size: .79rem; }
+
+      .logos { padding: 26px 0 47px; }.logos p { text-align: center; color: var(--muted); font-size: .76rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }.logo-row { display: flex; align-items: center; justify-content: space-around; gap: 20px; flex-wrap: wrap; color: #738078; font-family: Georgia, serif; font-size: 1.25rem; font-weight: bold; opacity: .83; }
+      .section { padding: 100px 0; }.section-white { background: white; }.section-heading { max-width: 650px; margin: 0 auto 54px; text-align: center; }.section-heading h2 { margin: 14px 0; font-size: clamp(2rem, 4vw, 3.25rem); line-height: 1.05; letter-spacing: -.055em; }.section-heading p { color: var(--muted); font-size: 1.02rem; }
+      .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }.feature { min-height: 250px; padding: 27px; border: 1px solid var(--line); border-radius: 18px; background: var(--white); transition: .25s ease; }.feature:hover { transform: translateY(-5px); border-color: #b8d3bf; box-shadow: 0 16px 35px rgba(20,51,38,.08); }.feature-icon { display: grid; place-items: center; width: 43px; height: 43px; margin-bottom: 25px; border-radius: 12px; background: #e4f4e7; color: var(--green); font-weight: 900; font-size: 1.2rem; }.feature h3 { margin-bottom: 10px; font-size: 1.12rem; letter-spacing: -.03em; }.feature p { color: var(--muted); font-size: .91rem; }
+      .split { display: grid; grid-template-columns: .9fr 1.1fr; gap: 75px; align-items: center; }.quote-panel { min-height: 390px; display: flex; flex-direction: column; justify-content: flex-end; padding: 35px; border-radius: 22px; color: white; background: linear-gradient(145deg, rgba(18,63,44,.25), rgba(18,63,44,.75)), linear-gradient(135deg, #a4c8ae, #30634a); }.quote-panel blockquote { max-width: 390px; margin: 0; font-family: Georgia, serif; font-size: clamp(1.65rem, 3vw, 2.2rem); line-height: 1.18; letter-spacing: -.04em; }.quote-panel cite { margin-top: 23px; font-family: Inter, sans-serif; font-size: .84rem; font-style: normal; }.quote-panel cite span { opacity: .7; }.check-list { list-style: none; padding: 0; margin: 25px 0 31px; }.check-list li { display: flex; gap: 12px; margin: 14px 0; color: #53645b; }.check-list li::before { content: "✓"; display: grid; flex: 0 0 21px; place-items: center; height: 21px; color: white; border-radius: 50%; background: var(--green); font-size: .7rem; font-weight: 900; }
+      .cta { padding: 70px 0; }.cta-box { display: flex; align-items: center; justify-content: space-between; gap: 30px; padding: 50px 57px; overflow: hidden; position: relative; border-radius: 23px; color: white; background: var(--deep-green); }.cta-box::after { content: ""; position: absolute; width: 330px; height: 330px; right: -85px; top: -178px; border-radius: 50%; background: #2e7a56; }.cta-box h2 { position: relative; z-index: 1; max-width: 570px; margin: 0; font-size: clamp(2rem, 4vw, 3rem); line-height: 1.05; letter-spacing: -.055em; }.cta-box .button { position: relative; z-index: 1; flex: 0 0 auto; }
+      footer { padding: 46px 0 26px; background: #0d2e20; color: #dce9df; }.footer-top { display: flex; align-items: start; justify-content: space-between; gap: 25px; padding-bottom: 42px; }.footer-top .brand { color: white; }.footer-text { max-width: 320px; margin: 14px 0 0; color: #9db4a5; font-size: .86rem; }.footer-links { display: flex; gap: 56px; }.footer-links div { display: grid; gap: 10px; }.footer-links b { margin-bottom: 3px; color: white; font-size: .86rem; }.footer-links a { color: #aabdb0; font-size: .84rem; }.footer-links a:hover { color: white; }.footer-bottom { display: flex; justify-content: space-between; gap: 16px; padding-top: 22px; border-top: 1px solid rgba(255,255,255,.12); color: #89a392; font-size: .76rem; }
+      @media (max-width: 800px) { .nav-links, .nav > .button { display: none; }.mobile-toggle { display: block; }.hero { padding-top: 60px; }.hero-grid, .split { grid-template-columns: 1fr; gap: 42px; }.visual { max-width: 530px; width: 93%; min-height: 390px; margin: auto; }.features { grid-template-columns: 1fr; }.section { padding: 75px 0; }.cta-box { align-items: flex-start; flex-direction: column; padding: 38px 29px; }.footer-top, .footer-bottom { flex-direction: column; }.footer-links { gap: 38px; }.announcement { font-size: .76rem; }.announcement a { display: inline-block; }.float-card { right: -15px; }.logo-row { font-size: 1rem; } }
+      @media (max-width: 420px) { .container { width: min(100% - 30px, 1160px); }.dashboard { left: 0; }.visual { width: 100%; }.float-card { transform: scale(.88) rotate(-4deg); transform-origin: right bottom; }.footer-links { gap: 24px; }.brand { font-size: 1.15rem; } }
+      .reading-progress { position: fixed; z-index: 50; top: 0; left: 0; width: 100%; height: 3px; }.reading-progress span { display: block; width: 0; height: 100%; background: var(--orange); transition: width .1s linear; }
+      .mobile-menu { display: none; }.mobile-toggle { cursor: pointer; }
+      .orb { animation: breathe 7s ease-in-out infinite; }
+      .bar { transform-origin: bottom; animation: chartIn .9s both; }.bar:nth-child(2) { animation-delay: .1s }.bar:nth-child(3) { animation-delay: .2s }.bar:nth-child(4) { animation-delay: .3s }.bar:nth-child(5) { animation-delay: .4s }.bar:nth-child(6) { animation-delay: .5s }
+      .reveal { opacity: 0; transform: translateY(22px); transition: opacity .65s ease, transform .65s ease; }.reveal.visible { opacity: 1; transform: none; }.reveal:nth-child(2) { transition-delay: .1s; }.reveal:nth-child(3) { transition-delay: .2s; }
+      @keyframes breathe { 50% { transform: scale(1.07) translate(-12px, 8px); } } @keyframes chartIn { from { transform: scaleY(.05); } to { transform: scaleY(1); } }
+      @media (max-width: 800px) { .mobile-menu { position: absolute; top: 74px; left: 0; right: 0; padding: 10px 20px 20px; background: rgba(248,246,240,.98); border-bottom: 1px solid var(--line); box-shadow: 0 13px 25px rgba(20,51,38,.08); }.mobile-menu.open { display: grid; gap: 3px; }.mobile-menu a { padding: 13px 0; border-bottom: 1px solid var(--line); font-size: .95rem; font-weight: 750; }.mobile-menu .button { margin-top: 10px; } }
+      @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } }
+      .catalogue { background: #f1f6f0; }.product-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }.product-card { overflow: hidden; display: flex; flex-direction: column; border: 1px solid #dce7de; border-radius: 18px; background: white; transition: transform .25s ease, box-shadow .25s ease; }.product-card:hover { transform: translateY(-6px); box-shadow: var(--shadow); }.product-art { display: grid; place-items: center; min-height: 210px; padding: 25px; color: white; background: linear-gradient(145deg, #2f7758, #124431); }.product-art.mint { background: linear-gradient(145deg, #b7e5c7, #3b9169); }.product-art.clean { background: linear-gradient(145deg, #ecf3ed, #b4d5bd); color: var(--deep-green); }.product-art.soap { background: linear-gradient(145deg, #b5d7a1, #507d49); }.pack { display: grid; place-items: center; width: 112px; height: 142px; border-radius: 9px 9px 16px 16px; box-shadow: inset 0 0 0 1px rgba(255,255,255,.35), 0 17px 28px rgba(10,45,28,.22); background: rgba(255,255,255,.18); font-size: .75rem; font-weight: 900; letter-spacing: .09em; text-align: center; }.product-art.clean .pack { background: white; }.product-copy { display: flex; flex: 1; flex-direction: column; padding: 22px; }.product-copy small { color: var(--green); font-size: .69rem; font-weight: 850; letter-spacing: .08em; text-transform: uppercase; }.product-copy h3 { margin: 7px 0 9px; font-size: 1.04rem; line-height: 1.15; }.product-copy p { color: var(--muted); font-size: .86rem; }.product-copy a { margin-top: auto; color: var(--green); font-size: .84rem; font-weight: 800; }.benefits { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 34px; }.benefit { padding: 17px; border-left: 3px solid var(--orange); background: white; color: #4e6257; font-size: .87rem; }.benefit b { display: block; color: var(--ink); font-size: .9rem; }.newsletter { display: grid; grid-template-columns: 1fr auto; gap: 28px; align-items: center; padding: 36px 42px; border-radius: 20px; color: white; background: #1b5940; }.newsletter h2 { margin: 0 0 6px; font-size: 1.7rem; letter-spacing: -.04em; }.newsletter p { margin: 0; color: #c1dac9; font-size: .9rem; }.subscribe { display: flex; gap: 9px; }.subscribe input { width: 235px; padding: 13px 15px; border: 0; border-radius: 999px; outline: none; font: inherit; }.certifications { display: flex; justify-content: center; align-items: center; gap: 42px; padding-top: 44px; color: #697c70; font-size: .75rem; font-weight: 800; letter-spacing: .07em; text-align: center; text-transform: uppercase; }.seal { display: grid; place-items: center; width: 70px; height: 70px; border: 1px solid #afc3b4; border-radius: 50%; color: var(--green); font-family: Georgia, serif; font-size: .7rem; line-height: 1.1; }.cert { display: flex; align-items: center; gap: 12px; } @media (max-width: 900px) { .product-grid, .benefits { grid-template-columns: repeat(2, 1fr); }.newsletter { grid-template-columns: 1fr; } } @media (max-width: 540px) { .product-grid, .benefits { grid-template-columns: 1fr; }.newsletter { padding: 30px 24px; }.subscribe { flex-direction: column; }.subscribe input { width: 100%; }.certifications { flex-direction: column; gap: 16px; } }
+      .families { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }.family { min-height: 190px; display: flex; flex-direction: column; justify-content: space-between; padding: 24px; border-radius: 18px; color: white; background: var(--deep-green); }.family:nth-child(2) { background: #4c8b60; }.family:nth-child(3) { background: #bc7f36; }.family:nth-child(4) { background: #875d64; }.family span { font-size: .75rem; font-weight: 800; letter-spacing: .08em; opacity: .75; text-transform: uppercase; }.family h3 { margin: 26px 0 0; font-size: 1.25rem; line-height: 1.07; letter-spacing: -.04em; }.family a { margin-top: 14px; font-size: .84rem; font-weight: 800; }.p4 { display: grid; grid-template-columns: .8fr 1.2fr; gap: 50px; align-items: center; }.p4-panel { padding: 34px; border-radius: 22px; color: white; background: linear-gradient(145deg, #143f2d, #367957); }.p4-panel h2 { margin: 15px 0; font-size: 2.35rem; line-height: 1; letter-spacing: -.06em; }.p4-panel p { color: #c8ded0; }.p4-steps { display: grid; gap: 11px; }.p4-step { display: grid; grid-template-columns: 43px 1fr; gap: 15px; align-items: center; padding: 15px; border: 1px solid var(--line); border-radius: 13px; background: white; }.step-number { display: grid; place-items: center; width: 40px; height: 40px; color: var(--green); border-radius: 50%; background: #e5f4e7; font-size: .8rem; font-weight: 900; }.p4-step b { display: block; }.p4-step small { color: var(--muted); } @media (max-width: 900px) { .families { grid-template-columns: repeat(2, 1fr); }.p4 { grid-template-columns: 1fr; } } @media (max-width: 540px) { .families { grid-template-columns: 1fr; } }
+    </style>
+  </head>
+  <body>
+    <div class="reading-progress" aria-hidden="true"><span></span></div>
+    <div class="announcement">Nouveau : Edmark Studio est disponible pour toutes les équipes. <a href="#contact">Découvrir la nouveauté →</a></div>
+    <header>
+      <nav class="nav container" aria-label="Navigation principale">
+        <a class="brand" href="#accueil"><span class="mark">e</span>edmark</a>
+        <div class="nav-links"><a href="#produits">Produits</a><a href="#solution">Bien-être</a><a href="#pourquoi">Notre engagement</a><a href="#ressources">Ressources</a></div>
+        <a class="button" href="#contact">Nous contacter <span>→</span></a>
+        <button class="mobile-toggle" aria-label="Ouvrir le menu" aria-expanded="false">☰</button>
+      </nav>
+      <div class="mobile-menu container" aria-label="Navigation mobile"><a href="#solution">Solution</a><a href="#pourquoi">Pourquoi Edmark</a><a href="#temoignage">Témoignages</a><a href="#ressources">Ressources</a><a class="button" href="#contact">Parler à un expert →</a></div>
+    </header>
+
+    <main id="accueil">
+      <section class="hero container">
+        <div class="hero-grid">
+          <div>
+            <span class="eyebrow">Healthcare & wellness</span>
+            <h1>Le bien-être, <em>au quotidien.</em></h1>
+            <p class="lead">Découvrez une sélection de soins et de compléments conçus pour s’intégrer avec simplicité à vos rituels personnels.</p>
+            <div class="actions"><a class="button" href="#produits">Découvrir les produits <span>→</span></a><a class="button outline" href="#solution">Notre approche</a></div>
+            <div class="proof"><div class="avatars"><span class="avatar"></span><span class="avatar"></span><span class="avatar"></span><span class="avatar"></span></div>Une gamme pensée pour vos rituels de bien-être</div>
+          </div>
+          <div class="visual" aria-label="Aperçu de la plateforme Edmark">
+            <div class="orb"></div>
+            <div class="dashboard">
+              <div class="dash-top"><div><div class="mini-title">VUE D’ENSEMBLE</div><b>Votre impact</b></div><span class="tiny-pill">En direct</span></div>
+              <div class="chart-card"><div class="chart-heading">Progression ce trimestre <span>+28,4 %</span></div><div class="bars"><i class="bar" style="height:31%"></i><i class="bar" style="height:49%"></i><i class="bar" style="height:42%"></i><i class="bar" style="height:66%"></i><i class="bar" style="height:60%"></i><i class="bar active" style="height:89%"></i></div></div>
+              <div class="dash-row"><div class="metric"><small>Objectifs atteints</small><strong>82 %</strong><span class="up">↗ +12 % ce mois</span></div><div class="metric"><small>Projets actifs</small><strong>24</strong><span class="up">↗ +4 cette semaine</span></div></div>
+            </div>
+            <div class="float-card"><span class="float-icon">✓</span><div><small>Objectif validé</small><b>Impact social · 100 %</b></div></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="logos container"><p>Ils font avancer leurs projets avec Edmark</p><div class="logo-row"><span>nubia.</span><span>altitude</span><span>BRÛLERIE</span><span>willow</span><span>nøva</span></div></section>
+
+      <section class="section section-white" id="univers"><div class="container"><div class="section-heading"><span class="eyebrow">L’univers Edmark</span><h2>Des gammes pensées pour chaque routine.</h2><p>Découvrez les principales collections qui structurent l’offre Edmark, des routines lifestyle aux soins du quotidien.</p></div><div class="families"><article class="family"><span>Programme lifestyle</span><h3>P4 Healthy<br>Slimming</h3><a href="#p4">Découvrir le programme →</a></article><article class="family"><span>Soin quotidien</span><h3>Healthcare &amp;<br>Wellness</h3><a href="#produits">Voir la sélection →</a></article><article class="family"><span>À savourer</span><h3>Lifestyle<br>Beverages</h3><a href="#contact">Explorer la gamme →</a></article><article class="family"><span>Beauté</span><h3>Edmark<br>Beauty Pack</h3><a href="#contact">Découvrir la gamme →</a></article></div></div></section>
+
+      <section class="section" id="p4"><div class="container p4"><div class="p4-panel"><span class="eyebrow" style="color:#d4f3dc">P4 healthy lifestyle</span><h2>Un parcours en quatre temps.</h2><p>Une approche structurée autour de produits et d’habitudes de vie, à personnaliser selon ses besoins et en complément d’une alimentation variée.</p><a class="button light" href="#contact">Demander des informations →</a></div><div class="p4-steps"><div class="p4-step"><span class="step-number">01</span><div><b>Shake Off</b><small>Une boisson à base de fibres, proposée en deux saveurs.</small></div></div><div class="p4-step"><span class="step-number">02</span><div><b>MRT Complex</b><small>Une boisson nutritionnelle disponible en chocolat, vanille ou fraise.</small></div></div><div class="p4-step"><span class="step-number">03</span><div><b>Splina Liquid Chlorophyll</b><small>Un complément liquide à base de chlorophylle végétale.</small></div></div><div class="p4-step"><span class="step-number">04</span><div><b>Ginseng Coffee</b><small>Un mélange de café Arabica avec extrait de ginseng.</small></div></div></div></div></section>
+
+      <section class="section catalogue" id="produits"><div class="container"><div class="section-heading"><span class="eyebrow">Notre sélection</span><h2>Des essentiels pour prendre soin de vous.</h2><p>Compléments alimentaires, soin bucco-dentaire et hygiène quotidienne : explorez la gamme Healthcare &amp; Wellness.</p></div><div class="product-grid"><article class="product-card"><div class="product-art"><div class="pack">HAWAIIAN<br>SPIRULINA</div></div><div class="product-copy"><small>Complément alimentaire</small><h3>Hawaiian Spirulina</h3><p>Une spiruline cultivée à Hawaï, naturellement riche en protéines et nutriments, pour compléter une alimentation équilibrée.</p><a href="#contact">En savoir plus →</a></div></article><article class="product-card"><div class="product-art mint"><div class="pack">EDMARK<br>MINT</div></div><div class="product-copy"><small>Hygiène buccale</small><h3>Mint sans sucre</h3><p>Des pastilles à la menthe au format nomade pour une sensation de fraîcheur, à emporter partout.</p><a href="#contact">En savoir plus →</a></div></article><article class="product-card"><div class="product-art clean"><div class="pack">SPLINA<br>TOOTHPASTE</div></div><div class="product-copy"><small>Soin quotidien</small><h3>Dentifrice Splina Chlorophyll</h3><p>Une formule au chlorophylle et à la menthe, créée pour offrir une expérience de brossage fraîche au quotidien.</p><a href="#contact">En savoir plus →</a></div></article><article class="product-card"><div class="product-art soap"><div class="pack">SPLINA<br>SOAP</div></div><div class="product-copy"><small>Soin du corps</small><h3>Savon Splina Chlorophyll</h3><p>Un savon végétal au chlorophylle issu de feuilles de mûrier blanc, avec une texture douce et un parfum discret.</p><a href="#contact">En savoir plus →</a></div></article></div><div class="benefits"><div class="benefit"><b>Hawaiian Spirulina</b>Source naturelle de nutriments et de protéines.</div><div class="benefit"><b>Edmark Mint</b>Fraîcheur pratique au format de poche.</div><div class="benefit"><b>Dentifrice Splina</b>Pour une routine de brossage agréable.</div><div class="benefit"><b>Savon Splina</b>Un geste simple de nettoyage quotidien.</div></div></div></section>
+
+      <section class="section section-white" id="solution"><div class="container"><div class="section-heading"><span class="eyebrow">Une méthode, un espace, un élan</span><h2>Tout ce qu’il faut pour passer à l’action.</h2><p>Conçue pour fluidifier le travail collectif, Edmark aligne votre équipe autour des priorités qui créent de la valeur.</p></div><div class="features"><article class="feature"><div class="feature-icon">✦</div><h3>Une vision partagée</h3><p>Réunissez vos objectifs, vos indicateurs et vos décisions dans un espace clair, vivant et accessible à tous.</p></article><article class="feature"><div class="feature-icon">↗</div><h3>Du progrès visible</h3><p>Suivez les avancées sans microgérer. Vos données deviennent une histoire simple à comprendre et à raconter.</p></article><article class="feature"><div class="feature-icon">∞</div><h3>Des équipes connectées</h3><p>Créez de meilleurs rituels, éliminez les silos et donnez à chacun le contexte nécessaire pour avancer.</p></article></div></div></section>
+
+      <section class="section" id="pourquoi"><div class="container split"><div class="quote-panel" id="temoignage"><blockquote>« Edmark nous a permis de retrouver une direction commune, sans alourdir nos journées. »</blockquote><cite><b>Camille Morel</b><br><span>Directrice de l’innovation, Nolia</span></cite></div><div><span class="eyebrow">Pensé pour les vraies équipes</span><h2 style="margin:15px 0;font-size:clamp(2rem,4vw,3.15rem);line-height:1.08;letter-spacing:-.055em">Une organisation qui respire, des résultats qui durent.</h2><p class="lead" style="font-size:1rem">La meilleure façon d’aller vite, c’est de savoir pourquoi l’on avance. Edmark transforme la stratégie en gestes quotidiens, sans complexité superflue.</p><ul class="check-list"><li>Des tableaux de bord utiles, jamais décoratifs</li><li>Une expérience pensée pour l’adoption par tous</li><li>Des conseils d’experts à chaque étape clé</li></ul><a class="button outline" href="#contact">Explorer la plateforme <span>→</span></a></div></div></section>
+
+      <section class="cta" id="contact"><div class="container"><div class="newsletter"><div><h2>Restez informé.</h2><p>Recevez les actualités, nouveautés et conseils Edmark directement dans votre boîte mail.</p></div><form class="subscribe"><input type="email" aria-label="Votre adresse e-mail" placeholder="Votre adresse e-mail" required><button class="button light" type="submit">S’inscrire →</button></form></div><div class="certifications"><div class="cert"><span class="seal">PROUD<br>MEMBER</span><span>Fier membre de nos organisations partenaires</span></div><div class="cert"><span class="seal">QUALITY<br>CARE</span><span>Reconnaissance &amp; certification</span></div></div></div></section>
+    </main>
+    <footer id="ressources"><div class="container"><div class="footer-top"><div><a class="brand" href="#accueil"><span class="mark">e</span>edmark</a><p class="footer-text">Un espace de travail plus clair pour les équipes qui veulent créer un impact qui compte.</p></div><div class="footer-links"><div><b>Produit</b><a href="#solution">Fonctionnalités</a><a href="#pourquoi">Méthode</a><a href="#contact">Tarifs</a></div><div><b>Entreprise</b><a href="#temoignage">Nos clients</a><a href="#ressources">Ressources</a><a href="mailto:bonjour@edmark.fr">Contact</a></div></div></div><div class="footer-bottom"><span>© 2026 Edmark. Tous droits réservés.</span><span>Confidentialité &nbsp; · &nbsp; Mentions légales</span></div></div></footer>
+    <script>
+      const toggle = document.querySelector('.mobile-toggle');
+      const menu = document.querySelector('.mobile-menu');
+      toggle.addEventListener('click', () => {
+        const open = menu.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open);
+        toggle.textContent = open ? '×' : '☰';
+      });
+      menu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => { menu.classList.remove('open'); toggle.setAttribute('aria-expanded', 'false'); toggle.textContent = '☰'; }));
+      const progress = document.querySelector('.reading-progress span');
+      const updateProgress = () => { const max = document.documentElement.scrollHeight - innerHeight; progress.style.width = max > 0 ? `${(scrollY / max) * 100}%` : '0%'; };
+      addEventListener('scroll', updateProgress, { passive: true }); updateProgress();
+      document.querySelector('.subscribe').addEventListener('submit', event => { event.preventDefault(); event.currentTarget.querySelector('button').textContent = 'Merci !'; });
+      const animated = document.querySelectorAll('.logos, .section-heading, .feature, .family, .p4-panel, .p4-step, .product-card, .benefit, .quote-panel, .split > div:last-child, .newsletter, .certifications');
+      animated.forEach(el => el.classList.add('reveal'));
+      const observer = new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } }), { threshold: .14 });
+      animated.forEach(el => observer.observe(el));
+    </script>
+  </body>
+</html>

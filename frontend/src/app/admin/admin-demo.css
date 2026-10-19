@@ -1,0 +1,20 @@
+.admin-demo { display: flex; min-height: 100vh; flex-direction: column; padding: 0 clamp(20px,6vw,80px); background: #f8fafc; color: #0f172a; }
+.admin-demo__topbar { display: flex; min-height: 76px; align-items: center; justify-content: space-between; border-bottom: 1px solid #e2e8f0; }
+.admin-demo__brand { display: inline-flex; align-items: center; font-size: 21px; font-weight: 800; letter-spacing: -1.25px; }
+.admin-demo__brand span { color: #6d28d9; }
+.admin-demo__brand i { width: 6px; height: 6px; margin: 10px 0 0 2px; border-radius: 50%; background: #f97316; }
+.admin-demo__back,.admin-demo__link { display: inline-flex; align-items: center; gap: 7px; color: #64748b; font-size: 12px; font-weight: 650; }
+.admin-demo__back { padding: 0; border: 0; background: transparent; font: inherit; cursor: pointer; }
+.admin-demo__back:hover,.admin-demo__link:hover { color: #6d28d9; }
+.admin-demo__content { width: min(100%,560px); margin: auto; padding: 48px 0; }
+.admin-demo__icon { display: grid; width: 52px; height: 52px; place-items: center; border: 1px solid #ddd6fe; border-radius: 15px; background: #f3e8ff; color: #6d28d9; }
+.admin-demo__eyebrow { margin: 24px 0 8px; color: #6d28d9; font-size: 12px; font-weight: 750; }
+.admin-demo__content h1 { margin: 0; font-size: clamp(32px,5vw,44px); line-height: 1.1; letter-spacing: -.05em; }
+.admin-demo__description { margin: 14px 0 0; color: #64748b; font-size: 15px; line-height: 1.75; }
+.admin-demo__notice { display: grid; gap: 4px; margin-top: 25px; padding: 14px 16px; border: 1px solid #fed7aa; border-radius: 12px; background: #fff7ed; color: #9a3412; font-size: 12px; line-height: 1.6; }
+.admin-demo__notice strong { font-size: 13px; }
+.admin-demo__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 18px; margin-top: 23px; }
+.admin-demo__button { display: inline-flex; min-height: 44px; align-items: center; justify-content: center; gap: 8px; padding: 0 15px; border: 1px solid #e2e8f0; border-radius: 10px; background: #fff; color: #334155; font-size: 12px; font-weight: 700; transition: border-color .2s,color .2s; }
+.admin-demo__button:hover { border-color: #c4b5fd; color: #6d28d9; }
+.admin-demo__footer { padding: 18px 0; border-top: 1px solid #e2e8f0; color: #94a3b8; text-align: center; font-size: 10px; }
+@media (max-width: 480px) { .admin-demo__topbar { min-height: 64px; } .admin-demo__back { font-size: 11px; } .admin-demo__actions { align-items: stretch; flex-direction: column; } .admin-demo__link { justify-content: center; } }
