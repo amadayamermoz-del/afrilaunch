@@ -15,6 +15,7 @@
     "prisma:validate": "prisma validate",
     "prisma:migrate:dev": "prisma migrate dev",
     "admin:promote": "ts-node -r dotenv/config src/scripts/promote-admin.ts",
+    "admin:email:update": "ts-node -r dotenv/config src/scripts/update-admin-email.ts",
     "test": "jest",
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },

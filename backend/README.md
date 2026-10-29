@@ -35,6 +35,12 @@ New accounts receive the `USER` role. After creating an account, grant the
 first administrator role with `npm run admin:promote -- user@example.com`;
 the API never accepts a role during public registration.
 
+If you cannot sign in because you forgot the email address, from `backend/`
+run `npm run admin:email:update -- new-address@example.com` with the correct
+database configured in `.env`. This updates the email only when exactly one
+active administrator exists; otherwise it stops without making changes.
+Confirm that `DATABASE_URL` points to the intended database before running it.
+
 ## Checks
 
 Run `npm run typecheck`, `npm run lint`, and `npm test`. Prisma schema

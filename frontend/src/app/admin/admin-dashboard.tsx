@@ -481,12 +481,43 @@ function OpportunitiesPanel({ opportunities, busy, categories, formOpen, editing
 }
 
 function SettingsPanel({ name, email }: { name: string; email: string }) {
+  const { updateEmail } = useAuthSession();
+  const [emailInput, setEmailInput] = useState(email);
+  const [emailSaving, setEmailSaving] = useState(false);
+  const [emailError, setEmailError] = useState("");
+  const [emailNotice, setEmailNotice] = useState("");
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
+
+  async function changeEmail(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setEmailError("");
+    setEmailNotice("");
+    setEmailSaving(true);
+    try {
+      const response = await fetch("/api/profile", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: emailInput.trim() }),
+      });
+      const body: unknown = await response.json();
+      if (!response.ok) {
+        throw new Error(apiError(body, "Impossible de modifier l’adresse e-mail."));
+      }
+      const updatedEmail = emailInput.trim().toLowerCase();
+      setEmailInput(updatedEmail);
+      updateEmail(updatedEmail);
+      setEmailNotice("Votre adresse e-mail a été modifiée.");
+    } catch (changeError) {
+      setEmailError(changeError instanceof Error ? changeError.message : "Impossible de modifier l’adresse e-mail.");
+    } finally {
+      setEmailSaving(false);
+    }
+  }
 
   async function changePassword(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -517,7 +548,13 @@ function SettingsPanel({ name, email }: { name: string; email: string }) {
   }
 
   return <div className="admin-settings-stack">
-    <section className="admin-card admin-settings-card"><div className="admin-card__heading"><div><h2>Compte administrateur</h2><p>Informations de la session actuellement connectée.</p></div></div><div className="admin-settings-profile"><span className="admin-avatar admin-avatar--large">{initials(name)}</span><span><strong>{name}</strong><small>Accès administrateur global</small></span></div><dl><div><dt>Nom</dt><dd>{name}</dd></div><div><dt>Adresse e-mail</dt><dd>{email}</dd></div><div><dt>Rôle</dt><dd><StatusBadge value="ADMIN" /></dd></div><div><dt>Authentification</dt><dd>Session sécurisée</dd></div></dl><p className="admin-settings-note"><ShieldCheck size={17} /> Les changements de rôle et d’accès des comptes se gèrent dans la rubrique Utilisateurs.</p></section>
+    <section className="admin-card admin-settings-card"><div className="admin-card__heading"><div><h2>Compte administrateur</h2><p>Informations de la session actuellement connectée.</p></div></div><div className="admin-settings-profile"><span className="admin-avatar admin-avatar--large">{initials(name)}</span><span><strong>{name}</strong><small>Accès administrateur global</small></span></div><dl><div><dt>Nom</dt><dd>{name}</dd></div><div><dt>Adresse e-mail</dt><dd>{email}</dd></div><div><dt>Rôle</dt><dd><StatusBadge value="ADMIN" /></dd></div><div><dt>Authentification</dt><dd>Session sécurisée</dd></div></dl>
+      {emailError && <p className="admin-settings-error" role="alert">{emailError}</p>}{emailNotice && <p className="admin-settings-success" role="status">{emailNotice}</p>}
+      <form className="admin-settings-email-form" onSubmit={(event) => void changeEmail(event)}>
+        <label>Modifier l’adresse e-mail<input type="email" autoComplete="email" value={emailInput} onChange={(event) => setEmailInput(event.target.value)} required maxLength={254} /></label>
+        <button className="admin-primary-button" type="submit" disabled={emailSaving || emailInput.trim().toLowerCase() === email}>{emailSaving ? "Enregistrement…" : "Enregistrer l’adresse e-mail"}</button>
+      </form>
+      <p className="admin-settings-note"><ShieldCheck size={17} /> Les changements de rôle et d’accès des comptes se gèrent dans la rubrique Utilisateurs.</p></section>
     <section className="admin-card admin-settings-card"><div className="admin-card__heading"><div><h2>Sécurité</h2><p>Modifiez le mot de passe de votre compte administrateur.</p></div></div>
       {error && <p className="admin-settings-error" role="alert">{error}</p>}{notice && <p className="admin-settings-success" role="status">{notice}</p>}
       <form className="admin-settings-password-form" onSubmit={(event) => void changePassword(event)}>
